@@ -9,7 +9,11 @@ export default async function getBusTimes(){
         .then(t => t.json())
         .catch(error => console.log(error)))
         
-        //setData(extractRows(responseJson));
+        if(responseJson === null)
+        {
+            return [{"route": "No more services scheduled today, please check back tomorrow", "time": ""}];
+        }
+
         return extractRows(responseJson);
   
     } catch (err) {
@@ -19,11 +23,11 @@ export default async function getBusTimes(){
   
   function extractRows(responseJson)
   {
-    return responseJson
-    .map(res => res.departures)
-    .map(departures => getRowsFromDepartures(departures))
-    .flat(1)
-    .sort((a, b) => a.time - b.time);
+        return responseJson
+        .map(res => res.departures)
+        .map(departures => getRowsFromDepartures(departures))
+        .flat(1)
+        .sort((a, b) => a.time - b.time);
   }
   
   function getRowsFromDepartures(departures)
