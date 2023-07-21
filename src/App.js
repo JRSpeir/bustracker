@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import refresh from './TfeService.js'
+import getBusTimes from './TfeService.js'
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import Table from './Table';
 
 function retriveData(setData)
 {
-  refresh().then(data => setData(data))
+  getBusTimes().then(data => setData(data))
 }
 
 export default function App() {

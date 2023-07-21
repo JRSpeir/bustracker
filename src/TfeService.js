@@ -1,4 +1,4 @@
-export default async function refresh(setData){
+export default async function getBusTimes(){
     try {
         const responseJson = await (await  fetch('https://tfe-opendata.com/api/v1/live_bus_times/36232893', {
           method: "GET",
