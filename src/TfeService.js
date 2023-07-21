@@ -36,7 +36,7 @@ export default async function getBusTimes(){
 
         const display = diff === 0 ? "Arrived" : diff;
     
-        const q = {"route": t.routeName, "time": display};
-        return q;
+        const rowData = {"route": t.routeName, "time": display};
+        return rowData;
     });
   }
