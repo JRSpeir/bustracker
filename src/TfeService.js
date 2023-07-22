@@ -1,14 +1,6 @@
 export default async function getBusTimes() {
   try {
-    const responseJson = await await fetch(
-      "https://tfe-opendata.com/api/v1/live_bus_times/36232893",
-      {
-        method: "GET",
-        headers: {
-          Authorization: process.env.TFE_KEY,
-        },
-      }
-    )
+    const responseJson = await sendRequest()
       .then((t) => t.json())
       .catch((error) => console.log(error));
 
@@ -16,6 +8,18 @@ export default async function getBusTimes() {
   } catch (err) {
     console.log(err.message);
   }
+}
+
+async function sendRequest() {
+  return await fetch(
+    "https://tfe-opendata.com/api/v1/live_bus_times/36232893",
+    {
+      method: "GET",
+      headers: {
+        Authorization: process.env.TFE_KEY,
+      },
+    }
+  );
 }
 
 function extractRows(responseJson) {
