@@ -10,11 +10,11 @@ import Paper from "@mui/material/Paper";
 export default function BasicTable({ data }) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Route</TableCell>
-            <TableCell align="left">Time</TableCell>
+            <TableCell align="center">Route</TableCell>
+            <TableCell align="center">Time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -23,8 +23,8 @@ export default function BasicTable({ data }) {
               key={row.time}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="left">{row.route}</TableCell>
-              <TableCell align="left">{row.time}</TableCell>
+              <TableCell align="center">{row.route}</TableCell>
+              <TableCell align="center">{row.time}</TableCell>
             </TableRow>
           ))}
         </TableBody>
