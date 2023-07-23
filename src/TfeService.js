@@ -1,4 +1,4 @@
-export default async function getBusTimes() {
+export async function getBusTimes() {
   try {
     const responseJson = await sendRequest()
       .then((res) => res.json())
