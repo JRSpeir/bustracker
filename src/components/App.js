@@ -6,8 +6,8 @@ import Box from "@mui/material/Box";
 import Table from "./Table.js";
 import ComboBox from "./ComboBox.js";
 
-function retriveData(setData) {
-  getBusTimes().then((data) => setData(data));
+function retriveData(setData, stopId) {
+  getBusTimes(stopId).then((data) => setData(data));
 }
 
 function retriveStops(setStops) {
@@ -17,10 +17,10 @@ function retriveStops(setStops) {
 export default function App() {
   const [data, setData] = useState([]);
   const [stops, setStops] = useState([]);
+  const [stopId, setStopId] = useState(36234964);
 
 
   useEffect(() => {
-    retriveData(setData);
     retriveStops(setStops)
   }, []);
 
@@ -30,7 +30,7 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           Bus Tracker
         </Typography>
-        <ComboBox stops={stops}/>
+        <ComboBox stops={stops} stopId={stopId} setData={setData}/>
         <Table data={data} />
       </Box>
     </Container>

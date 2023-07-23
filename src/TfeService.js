@@ -1,6 +1,6 @@
-async function getBusTimes() {
+async function getBusTimes(stopId) {
   try {
-    const responseJson = await sendLiveTimesRequest()
+    const responseJson = await sendLiveTimesRequest(stopId)
       .then((res) => res.json())
       .catch((error) => console.log(error));
 
@@ -10,9 +10,9 @@ async function getBusTimes() {
   }
 }
 
-async function sendLiveTimesRequest() {
+async function sendLiveTimesRequest(stopId) {
   return await fetch(
-    "https://tfe-opendata.com/api/v1/live_bus_times/36232893",
+    `https://tfe-opendata.com/api/v1/live_bus_times/${stopId}`,
     {
       method: "GET",
       headers: {
@@ -58,7 +58,7 @@ async function getStops() {
       .then((res) => res.json())
       .catch((error) => console.log(error));
 
-    return extracStopRows(responseJson);
+    return extractStopRows(responseJson);
   } catch (err) {
     console.log(err.message);
   }
@@ -73,7 +73,7 @@ async function sendStopsRequest() {
   });
 }
 
-function extracStopRows(responseJson) {
+function extractStopRows(responseJson) {
   return responseJson?.stops?.map((stop) => ({
     stop_id: stop.stop_id,
     stop_name: stop.name,
