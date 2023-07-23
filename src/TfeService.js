@@ -1,4 +1,4 @@
-export async function getBusTimes() {
+async function getBusTimes() {
   try {
     const responseJson = await sendLiveTimesRequest()
       .then((res) => res.json())
@@ -52,7 +52,7 @@ function getRowsFromDepartures(departures) {
   });
 }
 
-export async function getStops() {
+async function getStops() {
   try {
     const responseJson = await sendStopsRequest()
       .then((res) => res.json())
@@ -81,3 +81,5 @@ function extracStopRows(responseJson) {
     services: stop.services,
   }));
 }
+
+export {getBusTimes, getStops}
