@@ -1,6 +1,6 @@
 export async function getBusTimes() {
   try {
-    const responseJson = await sendRequest()
+    const responseJson = await sendLiveTimesRequest()
       .then((res) => res.json())
       .catch((error) => console.log(error));
 
@@ -10,7 +10,7 @@ export async function getBusTimes() {
   }
 }
 
-async function sendRequest() {
+async function sendLiveTimesRequest() {
   return await fetch(
     "https://tfe-opendata.com/api/v1/live_bus_times/36232893",
     {
@@ -50,4 +50,34 @@ function getRowsFromDepartures(departures) {
     const rowData = { route: t.routeName, time: display };
     return rowData;
   });
+}
+
+export async function getStops() {
+  try {
+    const responseJson = await sendStopsRequest()
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
+
+    return extracStopRows(responseJson);
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+async function sendStopsRequest() {
+  return await fetch("https://tfe-opendata.com/api/v1/stops", {
+    method: "GET",
+    headers: {
+      Authorization: process.env.TFE_KEY,
+    },
+  });
+}
+
+function extracStopRows(responseJson) {
+  return responseJson?.stops?.map((stop) => ({
+    stop_id: stop.stop_id,
+    stop_name: stop.name,
+    destinations: stop.destinations,
+    services: stop.services,
+  }));
 }

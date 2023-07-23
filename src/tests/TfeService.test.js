@@ -1,6 +1,9 @@
-import { getBusTimes } from "../TfeService";
+import { getBusTimes, getStops } from "../TfeService";
 import fetchMock from "jest-fetch-mock";
-import { apiResponse } from "./resources/TfeServiceTestResources";
+import {
+  liveTimesResponse,
+  stopsResponse,
+} from "./resources/TfeServiceTestResources";
 
 fetchMock.enableMocks();
 
@@ -8,7 +11,7 @@ beforeEach(() => {
   fetch.resetMocks();
 });
 
-it("Service should return expected object", async () => {
+it("getBusTimes should return expected object", async () => {
   fetch.mockResponseOnce(
     JSON.stringify([
       {
@@ -28,7 +31,7 @@ it("Service should return expected object", async () => {
   expect(result[0].time).toBe(1);
 });
 
-it("When time is 0 should be arrived", async () => {
+it("getBusTimes: When time is 0 should be arrived", async () => {
   fetch.mockResponseOnce(
     JSON.stringify([
       {
@@ -48,8 +51,8 @@ it("When time is 0 should be arrived", async () => {
   expect(result[0].time).toBe("Arrived");
 });
 
-it("When Multiple Services Should parse correctly", async () => {
-  fetch.mockResponseOnce(JSON.stringify(apiResponse));
+it("getBusTimes: When Multiple Services Should parse correctly", async () => {
+  fetch.mockResponseOnce(JSON.stringify(liveTimesResponse));
   jest.spyOn(global.Date, "now").mockReturnValue(1689980400000);
 
   const result = await getBusTimes();
@@ -62,5 +65,28 @@ it("When Multiple Services Should parse correctly", async () => {
     { route: "35", time: 4 },
   ];
 
+  expect(result).toStrictEqual(expectedResult);
+});
+
+it("getStops: should return expected object", async () => {
+  fetch.mockResponseOnce(JSON.stringify(stopsResponse));
+
+  const result = await getStops();
+
+  const expectedResult = [
+    {
+      stop_id: 36234964,
+      stop_name: "Cockburn Crescent",
+      destinations: ["Balerno", "Haymarket", "Wallyford", "Whitecraig"],
+      services: ["44", "N44"],
+    },
+    {
+      stop_id: 36234954,
+      stop_name: "Marchbank Drive",
+      destinations: ["Haymarket", "Wallyford", "Whitecraig"],
+      services: ["N44", "44"],
+    },
+  ];
+  expect(fetch).toHaveBeenCalledTimes(1);
   expect(result).toStrictEqual(expectedResult);
 });
