@@ -14,7 +14,7 @@ export default function BasicTable({ data }) {
         <TableHead>
           <TableRow>
             <TableCell align="center">Route</TableCell>
-            <TableCell align="center">Time</TableCell>
+            <TableCell align="center">Time Until Departure</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
