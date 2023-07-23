@@ -79,6 +79,7 @@ function extractStopRows(responseJson) {
     stop_name: stop.name,
     destinations: stop.destinations,
     services: stop.services,
+    direction: stop.direction
   }));
 }
 

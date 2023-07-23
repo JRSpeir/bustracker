@@ -19,7 +19,7 @@ export default function ComboBox({ stops, stopId, setData }) {
         if (option.stop_name == null) {
           return "No stop selected";
         }
-        return `${option.stop_name} \n(${option.destinations})  \n(${option.stop_id})`;
+        return `${option.stop_name} \n(${option?.stop_id})`;
       }}
       isOptionEqualToValue={(option, value) => {
         option.stop_id === value.stop_id;

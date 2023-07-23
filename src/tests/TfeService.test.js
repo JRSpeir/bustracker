@@ -79,12 +79,14 @@ it("getStops: should return expected object", async () => {
       stop_name: "Cockburn Crescent",
       destinations: ["Balerno", "Haymarket", "Wallyford", "Whitecraig"],
       services: ["44", "N44"],
+      direction: "W",
     },
     {
       stop_id: 36234954,
       stop_name: "Marchbank Drive",
       destinations: ["Haymarket", "Wallyford", "Whitecraig"],
       services: ["N44", "44"],
+      direction: "N",
     },
   ];
   expect(fetch).toHaveBeenCalledTimes(1);
