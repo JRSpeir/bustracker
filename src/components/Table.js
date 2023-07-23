@@ -20,7 +20,7 @@ export default function BasicTable({ data }) {
         <TableBody>
           {data.map((row) => (
             <TableRow
-              key={row.time}
+              key={crypto.randomUUID()}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell align="center">{row.route}</TableCell>
