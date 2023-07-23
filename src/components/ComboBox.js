@@ -8,8 +8,9 @@ export default function ComboBox({stops}) {
       disablePortal
       id="combo-box-demo"
       options={stops}
+      getOptionLabel={(option) => option.stop_name}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={(params) => <TextField {...params} label="Choose a stop" />}
     />
   );
 }
