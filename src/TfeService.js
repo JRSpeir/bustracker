@@ -1,7 +1,7 @@
 export default async function getBusTimes() {
   try {
     const responseJson = await sendRequest()
-      .then((t) => t.json())
+      .then((res) => res.json())
       .catch((error) => console.log(error));
 
     return extractRows(responseJson);
