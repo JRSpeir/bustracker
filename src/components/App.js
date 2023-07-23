@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import getBusTimes from "./TfeService.js";
+import {getBusTimes} from "../TfeService.js";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Table from "./Table";
+import Table from "./Table.js";
 
 function retriveData(setData) {
   getBusTimes().then((data) => setData(data));
