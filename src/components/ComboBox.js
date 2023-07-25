@@ -3,12 +3,11 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { getBusTimes } from "../TfeService";
 
-function retrieveData(setData, stopId, onSelect) {
+function retrieveData(setData, stopId) {
   getBusTimes(stopId).then((data) => setData(data));
-  onSelect();
 }
 
-export default function ComboBox({ stops, setData, onSelect, setHomeStop }) {
+export default function ComboBox({ stops, setData, setHomeStop, setButtonDisabled }) {
   return (
     <Autocomplete
       disablePortal
@@ -26,8 +25,9 @@ export default function ComboBox({ stops, setData, onSelect, setHomeStop }) {
         option.stop_id === value.stop_id;
       }}
       onChange={(event, newValue) => {
-        retrieveData(setData, newValue?.stop_id, onSelect, newValue);
+        retrieveData(setData, newValue?.stop_id, newValue);
         setHomeStop(newValue);
+        setButtonDisabled(newValue == null);
       }}
       sx={{ minWidth: 200 }}
       renderInput={(params) => <TextField {...params} label="Choose a stop" />}

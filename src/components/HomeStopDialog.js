@@ -8,6 +8,7 @@ import { Box, Button } from "@mui/material";
 
 function SimpleDialog(props) {
   const { onClose, open, setData, stops, setHomeStop } = props;
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
 
   return (
     <Dialog open={open} fullWidth={true}>
@@ -16,12 +17,12 @@ function SimpleDialog(props) {
         <ComboBox
           stops={stops}
           setData={setData}
-          onSelect={onClose}
           setHomeStop={setHomeStop}
+          setButtonDisabled={setButtonDisabled}
         />
       </Box>
       <Box display="flex" justifyContent="space-around" sx={{my: 2}}>
-        <Button size="large" variant="contained" endIcon={<DoneOutlineIcon/>}>Accept</Button>
+        <Button size="large" variant="contained" endIcon={<DoneOutlineIcon/>} onClick={() =>{onClose()}} disabled={buttonDisabled}>Accept</Button>
       </Box>
     </Dialog>
   );
