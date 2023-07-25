@@ -3,7 +3,7 @@ import { getStops } from "../TfeService.js";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import Table from "./Table.js";
 import HomeStopDialog from "./HomeStopDialog.js";
 
@@ -15,7 +15,7 @@ export default function App() {
   const [data, setData] = useState([]);
   const [stops, setStops] = useState([]);
   const [open, setOpen] = useState(false);
-  const [homeStop, setHomeStop] = useState({})
+  const [homeStop, setHomeStop] = useState({});
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,8 +29,6 @@ export default function App() {
     retrieveStops(setStops);
   }, []);
 
-
-
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
@@ -40,11 +38,15 @@ export default function App() {
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Typography variant="h4" component="h1" gutterBottom>
-        Home Stop: {homeStop?.stop_name}
+          Home Stop: {homeStop?.stop_name}
         </Typography>
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
-        <Button alignItems="center" variant="outlined" onClick={handleClickOpen}>
+        <Button
+          alignItems="center"
+          variant="outlined"
+          onClick={handleClickOpen}
+        >
           Change Home Stop
         </Button>
       </Box>
@@ -52,12 +54,12 @@ export default function App() {
         <Table data={data} />
       </Box>
       <HomeStopDialog
-          setData={setData}
-          open={open}
-          onClose={handleClose}
-          stops={stops}
-          setHomeStop={setHomeStop}
-        />
+        setData={setData}
+        open={open}
+        onClose={handleClose}
+        stops={stops}
+        setHomeStop={setHomeStop}
+      />
     </Container>
   );
 }

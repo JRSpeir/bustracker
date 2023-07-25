@@ -8,7 +8,7 @@ function retrieveData(setData, stopId, onSelect) {
   onSelect();
 }
 
-export default function ComboBox({ stops, setData, onSelect, setHomeStop}) {
+export default function ComboBox({ stops, setData, onSelect, setHomeStop }) {
   return (
     <Autocomplete
       disablePortal
@@ -27,7 +27,7 @@ export default function ComboBox({ stops, setData, onSelect, setHomeStop}) {
       }}
       onChange={(event, newValue) => {
         retrieveData(setData, newValue?.stop_id, onSelect, newValue);
-        setHomeStop(newValue)
+        setHomeStop(newValue);
       }}
       sx={{ minWidth: 300 }}
       renderInput={(params) => <TextField {...params} label="Choose a stop" />}
