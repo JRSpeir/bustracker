@@ -2,8 +2,9 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import ComboBox from "./ComboBox";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 function SimpleDialog(props) {
   const { onClose, open, setData, stops, setHomeStop } = props;
@@ -18,6 +19,9 @@ function SimpleDialog(props) {
           onSelect={onClose}
           setHomeStop={setHomeStop}
         />
+      </Box>
+      <Box display="flex" justifyContent="space-around" sx={{my: 2}}>
+        <Button size="large" variant="contained" endIcon={<DoneOutlineIcon/>}>Accept</Button>
       </Box>
     </Dialog>
   );
