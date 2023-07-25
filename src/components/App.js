@@ -59,6 +59,7 @@ export default function App() {
         onClose={handleClose}
         stops={stops}
         setHomeStop={setHomeStop}
+        homeStop={homeStop}
       />
     </Container>
   );
