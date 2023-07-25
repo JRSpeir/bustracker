@@ -43,7 +43,7 @@ export default function App() {
       </Box>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Button
-          alignItems="center"
+          alignitems="center"
           variant="outlined"
           onClick={handleClickOpen}
         >

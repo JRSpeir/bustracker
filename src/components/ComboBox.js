@@ -29,7 +29,7 @@ export default function ComboBox({ stops, setData, onSelect, setHomeStop }) {
         retrieveData(setData, newValue?.stop_id, onSelect, newValue);
         setHomeStop(newValue);
       }}
-      sx={{ minWidth: 300 }}
+      sx={{ minWidth: 200 }}
       renderInput={(params) => <TextField {...params} label="Choose a stop" />}
     />
   );
