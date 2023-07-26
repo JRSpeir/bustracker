@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import CancelIcon from '@mui/icons-material/Cancel';
 import ComboBox from "./ComboBox";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, IconButton } from "@mui/material";
 
 function SimpleDialog(props) {
   const { onClose, open, setData, stops, setHomeStop, homeStop } = props;
@@ -12,7 +13,16 @@ function SimpleDialog(props) {
 
   return (
     <Dialog open={open} fullWidth={true}>
+      <Box display="flex" justifyContent="space-between" sx={{ my: 2, mx: 2 }}>
       <DialogTitle>Select Home Stop</DialogTitle>
+        <IconButton
+          size="large"
+          children={<CancelIcon/>}
+          onClick={() => {
+            onClose();
+          }}
+        />
+      </Box>
       <Box height="100vh" sx={{ mx: 4, my: 2 }}>
         <ComboBox
           stops={stops}
@@ -20,10 +30,21 @@ function SimpleDialog(props) {
           setHomeStop={setHomeStop}
           setButtonDisabled={setButtonDisabled}
         />
-        <Box display="flex" flexDirection="column" justifyContent="space-around" sx={{ my: 2 }}>
-          <Typography sx={{my:1}}>Stop Direction: {homeStop?.direction}</Typography>
-          <Typography sx={{my:1}}>Stop Services: {homeStop?.services?.join(", ")}</Typography>
-          <Typography sx={{my:1}}>Stop Destinations: {homeStop?.destinations?.join(", ")}</Typography>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-around"
+          sx={{ my: 2 }}
+        >
+          <Typography sx={{ my: 1 }}>
+            Stop Direction: {homeStop?.direction}
+          </Typography>
+          <Typography sx={{ my: 1 }}>
+            Stop Services: {homeStop?.services?.join(", ")}
+          </Typography>
+          <Typography sx={{ my: 1 }}>
+            Stop Destinations: {homeStop?.destinations?.join(", ")}
+          </Typography>
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-around" sx={{ my: 2 }}>
