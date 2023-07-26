@@ -8,8 +8,9 @@ import ComboBox from "./ComboBox";
 import { Box, Button, Typography, IconButton } from "@mui/material";
 
 function SimpleDialog(props) {
-  const { onClose, open, setData, stops, setHomeStop, homeStop } = props;
+  const { onClose, open, setData, stops, setHomeStop, homeStop} = props;
   const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [selectedStop, setSelectedStop] = React.useState(null);
 
   return (
     <Dialog open={open} fullWidth={true}>
@@ -19,6 +20,7 @@ function SimpleDialog(props) {
           size="large"
           children={<CancelIcon/>}
           onClick={() => {
+            setHomeStop(selectedStop);
             onClose();
           }}
         />
@@ -29,6 +31,8 @@ function SimpleDialog(props) {
           setData={setData}
           setHomeStop={setHomeStop}
           setButtonDisabled={setButtonDisabled}
+          setSelectedStop={setSelectedStop}
+          selectedStop={selectedStop}
         />
         <Box
           display="flex"
@@ -37,13 +41,13 @@ function SimpleDialog(props) {
           sx={{ my: 2 }}
         >
           <Typography sx={{ my: 1 }}>
-            Stop Direction: {homeStop?.direction}
+            Stop Direction: {selectedStop?.direction}
           </Typography>
           <Typography sx={{ my: 1 }}>
-            Stop Services: {homeStop?.services?.join(", ")}
+            Stop Services: {selectedStop?.services?.join(", ")}
           </Typography>
           <Typography sx={{ my: 1 }}>
-            Stop Destinations: {homeStop?.destinations?.join(", ")}
+            Stop Destinations: {selectedStop?.destinations?.join(", ")}
           </Typography>
         </Box>
       </Box>
@@ -53,6 +57,7 @@ function SimpleDialog(props) {
           variant="contained"
           endIcon={<DoneOutlineIcon />}
           onClick={() => {
+            setHomeStop(selectedStop);
             onClose();
           }}
           disabled={buttonDisabled}
@@ -70,7 +75,7 @@ SimpleDialog.propTypes = {
   setData: PropTypes.func.isRequired,
   stops: PropTypes.array.isRequired,
   setHomeStop: PropTypes.func.isRequired,
-  homeStop: PropTypes.object,
+  homeStop: PropTypes.object.isRequired
 };
 
 export default SimpleDialog;
