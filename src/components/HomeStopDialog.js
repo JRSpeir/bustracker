@@ -1,24 +1,32 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
+import ExploreIcon from "@mui/icons-material/Explore";
+import SignpostIcon from "@mui/icons-material/Signpost";
+import { DirectionsBus } from "@mui/icons-material";
 import ComboBox from "./ComboBox";
-import { Box, Button, Typography, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  IconButton,
+  Dialog,
+  DialogTitle,
+} from "@mui/material";
 
 function SimpleDialog(props) {
-  const { onClose, open, setData, stops, setHomeStop, homeStop} = props;
+  const { onClose, open, setData, stops, setHomeStop } = props;
   const [buttonDisabled, setButtonDisabled] = React.useState(true);
   const [selectedStop, setSelectedStop] = React.useState(null);
 
   return (
     <Dialog open={open} fullWidth={true}>
       <Box display="flex" justifyContent="space-between" sx={{ my: 2, mx: 2 }}>
-      <DialogTitle>Select Home Stop</DialogTitle>
+        <DialogTitle>Select Home Stop</DialogTitle>
         <IconButton
           size="large"
-          children={<CancelIcon/>}
+          children={<CancelIcon />}
           onClick={() => {
             setHomeStop(selectedStop);
             onClose();
@@ -38,17 +46,38 @@ function SimpleDialog(props) {
           display="flex"
           flexDirection="column"
           justifyContent="space-around"
-          sx={{ my: 2 }}
+          sx={{ my: 2, mx: 5 }}
         >
-          <Typography sx={{ my: 1 }}>
-            Stop Direction: {selectedStop?.direction}
-          </Typography>
-          <Typography sx={{ my: 1 }}>
-            Stop Services: {selectedStop?.services?.join(", ")}
-          </Typography>
-          <Typography sx={{ my: 1 }}>
-            Stop Destinations: {selectedStop?.destinations?.join(", ")}
-          </Typography>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            sx={{ my: 3 }}
+          >
+            <ExploreIcon fontSize="large" />
+            <Typography sx={{ mx: 1 }}>Stop Direction:</Typography>
+            <Typography>{selectedStop?.direction}</Typography>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            sx={{ my: 3 }}
+          >
+            <DirectionsBus fontSize="large" />
+            <Typography sx={{ mx: 1 }}>Stop Services:</Typography>
+            <Typography>{selectedStop?.services?.join(", ")}</Typography>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="flex-start"
+            sx={{ my: 3 }}
+          >
+            <SignpostIcon fontSize="large" />
+            <Typography sx={{ mx: 1 }}>Stop Destinations:</Typography>
+            <Typography>{selectedStop?.destinations?.join(", ")}</Typography>
+          </Box>
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-around" sx={{ my: 2 }}>
@@ -75,7 +104,6 @@ SimpleDialog.propTypes = {
   setData: PropTypes.func.isRequired,
   stops: PropTypes.array.isRequired,
   setHomeStop: PropTypes.func.isRequired,
-  homeStop: PropTypes.object.isRequired
 };
 
 export default SimpleDialog;
