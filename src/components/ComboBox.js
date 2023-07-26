@@ -14,7 +14,7 @@ export default function ComboBox({ stops, setData, setHomeStop, setButtonDisable
       freeSolo
       id="combo-box-demo"
       options={stops}
-      defaultValue={stops[0]}
+      defaultValue={null}
       getOptionLabel={(option) => {
         if (option.stop_name == null) {
           return "No stop selected";
